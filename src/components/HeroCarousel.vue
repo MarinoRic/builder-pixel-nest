@@ -134,7 +134,7 @@ const slides = ref<Slide[]>([
 ])
 
 const currentSlide = ref(0)
-let autoSlideInterval: NodeJS.Timeout
+let autoSlideInterval: number
 
 const nextSlide = () => {
   currentSlide.value = (currentSlide.value + 1) % slides.value.length
@@ -149,14 +149,14 @@ const goToSlide = (index: number) => {
 }
 
 const startAutoSlide = () => {
-  autoSlideInterval = setInterval(() => {
+  autoSlideInterval = window.setInterval(() => {
     nextSlide()
   }, 6000) // Change slide every 6 seconds
 }
 
 const stopAutoSlide = () => {
   if (autoSlideInterval) {
-    clearInterval(autoSlideInterval)
+    window.clearInterval(autoSlideInterval)
   }
 }
 

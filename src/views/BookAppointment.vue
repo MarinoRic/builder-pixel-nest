@@ -221,6 +221,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
+import type { Service, TimeSlot, CalendarDay } from '../types/booking'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -265,9 +266,9 @@ const services = ref([
 ])
 
 // State
-const selectedService = ref(null)
-const selectedDate = ref(null)
-const selectedTimeSlot = ref(null)
+const selectedService = ref<Service | null>(null)
+const selectedDate = ref<Date | null>(null)
+const selectedTimeSlot = ref<TimeSlot | null>(null)
 const currentDate = ref(new Date())
 
 // Calendar computed properties
@@ -376,7 +377,7 @@ const nextMonth = () => {
   currentDate.value = new Date(currentDate.value.getFullYear(), currentDate.value.getMonth() + 1, 1)
 }
 
-const selectDate = (dateObj) => {
+const selectDate = (dateObj: CalendarDay) => {
   if (dateObj.isAvailable) {
     selectedDate.value = dateObj.date
     selectedTimeSlot.value = null // Reset time slot selection
