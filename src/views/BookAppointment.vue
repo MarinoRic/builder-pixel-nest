@@ -92,7 +92,7 @@
                 <div class="border-t border-barbershop-border pt-2 mt-3">
                   <div class="flex justify-between text-sm font-semibold">
                     <span class="text-barbershop-text">Durata Totale: {{ totalDuration }}min</span>
-                    <span class="text-barbershop-gold">Totale: €{{ totalPrice }}</span>
+                    <span class="text-barbershop-gold">Totale: ��{{ totalPrice }}</span>
                   </div>
                 </div>
               </div>
@@ -366,6 +366,24 @@ const formatSelectedDate = computed(() => {
   })
 })
 
+const totalDuration = computed(() => {
+  return selectedServices.value.reduce((total, service) => total + service.duration, 0)
+})
+
+const totalPrice = computed(() => {
+  return selectedServices.value.reduce((total, service) => total + service.price, 0)
+})
+
+const endTime = computed(() => {
+  if (!selectedTimeSlot.value || totalDuration.value === 0) return ''
+  const [hours, minutes] = selectedTimeSlot.value.time.split(':').map(Number)
+  const startMinutes = hours * 60 + minutes
+  const endMinutes = startMinutes + totalDuration.value
+  const endHours = Math.floor(endMinutes / 60)
+  const endMins = endMinutes % 60
+  return `${endHours.toString().padStart(2, '0')}:${endMins.toString().padStart(2, '0')}`
+})
+
 const calendarDays = computed(() => {
   const year = currentDate.value.getFullYear()
   const month = currentDate.value.getMonth()
@@ -457,6 +475,28 @@ const selectDate = (dateObj: CalendarDay) => {
     selectedDate.value = dateObj.date
     selectedTimeSlot.value = null // Reset time slot selection
   }
+}
+
+const isServiceSelected = (service: Service) => {
+  return selectedServices.value.some(s => s.id === service.id)
+}
+
+const toggleService = (service: Service) => {
+  if (service.isSpecial) {
+    showCallMessage.value = !showCallMessage.value
+    return
+  }
+
+  const index = selectedServices.value.findIndex(s => s.id === service.id)
+  if (index >= 0) {
+    selectedServices.value.splice(index, 1)
+  } else {
+    selectedServices.value.push(service)
+  }
+
+  // Reset time slot when services change
+  selectedTimeSlot.value = null
+  showCallMessage.value = false
 }
 
 const confirmBooking = async () => {
