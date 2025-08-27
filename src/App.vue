@@ -9,8 +9,8 @@
       <router-view />
     </main>
     
-    <!-- Footer -->
-    <Footer />
+    <!-- Footer (hidden on auth pages) -->
+    <Footer v-if="shouldShowFooter" />
     
     <!-- Scroll to Top Button -->
     <Transition name="fade">
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
