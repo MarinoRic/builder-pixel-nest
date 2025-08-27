@@ -1,1 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap');
 @import './base.css';
+
+/* Barbershop Theme Variables */
+:root {
+  --barbershop-primary: #1a1a1a;
+  --barbershop-secondary: #2a2a2a;
+  --barbershop-accent: #3a3a3a;
+  --barbershop-charcoal: #404040;
+  --barbershop-gold: #d4af37;
+  --barbershop-gold-light: #e6c867;
+  --barbershop-gold-dark: #b8941f;
+  --barbershop-text: #f5f5f5;
+  --barbershop-text-muted: #b0b0b0;
+  --barbershop-border: #505050;
+}
+
+/* Custom utility classes */
+@layer components {
+  .btn-primary {
+    @apply bg-barbershop-gold hover:bg-barbershop-gold-dark text-black font-semibold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .btn-secondary {
+    @apply border-2 border-barbershop-gold text-barbershop-gold hover:bg-barbershop-gold hover:text-black px-6 py-3 rounded-lg transition-all duration-300;
+  }
+  
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-barbershop-gold to-barbershop-gold-light bg-clip-text text-transparent;
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar but keep functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
