@@ -56,27 +56,27 @@
       <!-- Mobile Navigation -->
       <div v-if="isMobileMenuOpen" class="md:hidden mt-4 py-4 border-t border-barbershop-border animate-slide-up">
         <div class="flex flex-col space-y-4">
-          <a href="#home" @click="closeMobileMenu" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Home</a>
-          <a href="#servizi" @click="closeMobileMenu" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Servizi</a>
-          <a href="#galleria" @click="closeMobileMenu" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Galleria</a>
-          <a href="#contatti" @click="closeMobileMenu" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Contatti</a>
-          
+          <router-link to="/" @click="closeMobileMenu" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Home</router-link>
+          <a href="/#servizi" @click="closeMobileMenu" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Servizi</a>
+          <a href="/#galleria" @click="closeMobileMenu" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Galleria</a>
+          <a href="/#contatti" @click="closeMobileMenu" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Contatti</a>
+
           <!-- Mobile Login Status -->
           <div class="pt-4 border-t border-barbershop-border">
-            <div v-if="isLoggedIn" class="flex items-center justify-between">
-              <div class="flex items-center space-x-2">
+            <div v-if="authStore.isLoggedIn" class="space-y-2">
+              <router-link to="/area-personale" @click="closeMobileMenu" class="flex items-center space-x-2 text-barbershop-text hover:text-barbershop-gold transition-colors">
                 <div class="w-8 h-8 bg-barbershop-gold rounded-full flex items-center justify-center">
-                  <span class="text-black text-sm font-semibold">{{ userInitials }}</span>
+                  <span class="text-black text-sm font-semibold">{{ authStore.userInitials }}</span>
                 </div>
-                <span class="text-barbershop-text text-sm">{{ userName }}</span>
-              </div>
-              <button @click="logout" class="text-barbershop-text-muted hover:text-barbershop-gold transition-colors text-sm">
+                <span class="text-sm">{{ authStore.userFullName }}</span>
+              </router-link>
+              <button @click="logout" class="w-full text-left text-barbershop-text-muted hover:text-barbershop-gold transition-colors text-sm">
                 Esci
               </button>
             </div>
-            <button v-else @click="openLoginModal" class="btn-secondary w-full text-sm py-2">
+            <router-link v-else to="/login" @click="closeMobileMenu" class="btn-secondary w-full text-sm py-2 block text-center">
               Area Personale
-            </button>
+            </router-link>
           </div>
         </div>
       </div>
@@ -85,23 +85,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '../stores/auth'
+
+const router = useRouter()
+const authStore = useAuthStore()
 
 // Mobile menu state
 const isMobileMenuOpen = ref(false)
-
-// Login state (mock data - replace with real authentication)
-const isLoggedIn = ref(false)
-const userName = ref('Mario Rossi')
-
-const userInitials = computed(() => {
-  if (!userName.value) return 'U'
-  return userName.value
-    .split(' ')
-    .map(name => name.charAt(0))
-    .join('')
-    .toUpperCase()
-})
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
@@ -111,15 +103,14 @@ const closeMobileMenu = () => {
   isMobileMenuOpen.value = false
 }
 
-const openLoginModal = () => {
-  // TODO: Implement login modal
-  console.log('Opening login modal...')
-  // For demo purposes, let's simulate login
-  isLoggedIn.value = true
+const logout = () => {
+  authStore.logout()
+  closeMobileMenu()
+  router.push('/')
 }
 
-const logout = () => {
-  isLoggedIn.value = false
-  closeMobileMenu()
-}
+onMounted(() => {
+  // Initialize auth state on component mount
+  authStore.initAuth()
+})
 </script>
