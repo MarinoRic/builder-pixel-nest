@@ -17,28 +17,30 @@
 
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center space-x-8">
-          <a href="#home" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Home</a>
-          <a href="#servizi" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Servizi</a>
-          <a href="#galleria" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Galleria</a>
-          <a href="#contatti" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Contatti</a>
+          <router-link to="/" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Home</router-link>
+          <a href="/#servizi" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Servizi</a>
+          <a href="/#galleria" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Galleria</a>
+          <a href="/#contatti" class="text-barbershop-text hover:text-barbershop-gold transition-colors duration-300">Contatti</a>
         </div>
 
         <!-- Login Status & Mobile Menu -->
         <div class="flex items-center space-x-4">
           <!-- Login Status -->
           <div class="hidden sm:flex items-center space-x-3">
-            <div v-if="isLoggedIn" class="flex items-center space-x-2">
-              <div class="w-8 h-8 bg-barbershop-gold rounded-full flex items-center justify-center">
-                <span class="text-black text-sm font-semibold">{{ userInitials }}</span>
-              </div>
-              <span class="text-barbershop-text text-sm">{{ userName }}</span>
-              <button @click="logout" class="text-barbershop-text-muted hover:text-barbershop-gold transition-colors text-sm">
+            <div v-if="authStore.isLoggedIn" class="flex items-center space-x-2">
+              <router-link to="/area-personale" class="flex items-center space-x-2 hover:text-barbershop-gold transition-colors">
+                <div class="w-8 h-8 bg-barbershop-gold rounded-full flex items-center justify-center">
+                  <span class="text-black text-sm font-semibold">{{ authStore.userInitials }}</span>
+                </div>
+                <span class="text-barbershop-text text-sm">{{ authStore.userFullName }}</span>
+              </router-link>
+              <button @click="logout" class="text-barbershop-text-muted hover:text-barbershop-gold transition-colors text-sm ml-2">
                 Esci
               </button>
             </div>
-            <button v-else @click="openLoginModal" class="btn-secondary text-sm py-2 px-4">
+            <router-link v-else to="/login" class="btn-secondary text-sm py-2 px-4">
               Area Personale
-            </button>
+            </router-link>
           </div>
 
           <!-- Mobile menu button -->
