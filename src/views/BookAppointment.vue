@@ -4,12 +4,17 @@
       <!-- Header -->
       <div class="mb-8">
         <div class="flex items-center mb-4">
-          <router-link 
-            to="/area-personale" 
+          <router-link
+            to="/area-personale"
             class="text-barbershop-text-muted hover:text-barbershop-gold transition-colors mr-4"
           >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              />
             </svg>
           </router-link>
           <h1 class="text-3xl font-display font-bold text-barbershop-text">
@@ -25,9 +30,7 @@
         <!-- Services Selection -->
         <div class="lg:col-span-1">
           <div class="bg-barbershop-secondary border border-barbershop-border rounded-xl p-6">
-            <h3 class="text-xl font-semibold text-barbershop-text mb-6">
-              Seleziona i Servizi
-            </h3>
+            <h3 class="text-xl font-semibold text-barbershop-text mb-6">Seleziona i Servizi</h3>
             <div class="space-y-3">
               <div
                 v-for="service in services"
@@ -39,28 +42,44 @@
                     ? 'border-barbershop-text-muted bg-barbershop-secondary hover:border-barbershop-gold'
                     : isServiceSelected(service)
                       ? 'border-barbershop-gold bg-barbershop-gold/10'
-                      : 'border-barbershop-border hover:border-barbershop-text-muted bg-barbershop-accent'
+                      : 'border-barbershop-border hover:border-barbershop-text-muted bg-barbershop-accent',
                 ]"
               >
                 <div class="flex justify-between items-start">
                   <div class="flex-1">
                     <div class="flex items-center">
                       <div v-if="!service.isSpecial" class="mr-3">
-                        <div :class="[
-                          'w-5 h-5 border-2 rounded flex items-center justify-center transition-colors',
-                          isServiceSelected(service)
-                            ? 'bg-barbershop-gold border-barbershop-gold'
-                            : 'border-barbershop-border'
-                        ]">
-                          <svg v-if="isServiceSelected(service)" class="w-3 h-3 text-black" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        <div
+                          :class="[
+                            'w-5 h-5 border-2 rounded flex items-center justify-center transition-colors',
+                            isServiceSelected(service)
+                              ? 'bg-barbershop-gold border-barbershop-gold'
+                              : 'border-barbershop-border',
+                          ]"
+                        >
+                          <svg
+                            v-if="isServiceSelected(service)"
+                            class="w-3 h-3 text-black"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clip-rule="evenodd"
+                            />
                           </svg>
                         </div>
                       </div>
                       <div>
                         <h4 class="font-semibold text-barbershop-text">{{ service.name }}</h4>
-                        <p class="text-sm text-barbershop-text-muted mt-1">{{ service.description }}</p>
-                        <p v-if="!service.isSpecial" class="text-xs text-barbershop-text-muted mt-2">
+                        <p class="text-sm text-barbershop-text-muted mt-1">
+                          {{ service.description }}
+                        </p>
+                        <p
+                          v-if="!service.isSpecial"
+                          class="text-xs text-barbershop-text-muted mt-2"
+                        >
                           Durata: {{ service.duration }} min
                         </p>
                       </div>
@@ -70,8 +89,18 @@
                     <span class="text-lg font-bold text-barbershop-gold">€{{ service.price }}</span>
                   </div>
                   <div v-else class="ml-4">
-                    <svg class="w-6 h-6 text-barbershop-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    <svg
+                      class="w-6 h-6 text-barbershop-gold"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      />
                     </svg>
                   </div>
                 </div>
@@ -79,10 +108,17 @@
             </div>
 
             <!-- Selected Services Summary -->
-            <div v-if="selectedServices.length > 0" class="mt-6 p-4 bg-barbershop-accent border border-barbershop-border rounded-lg">
+            <div
+              v-if="selectedServices.length > 0"
+              class="mt-6 p-4 bg-barbershop-accent border border-barbershop-border rounded-lg"
+            >
               <h4 class="font-semibold text-barbershop-text mb-3">Servizi Selezionati</h4>
               <div class="space-y-2">
-                <div v-for="service in selectedServices" :key="service.id" class="flex justify-between text-sm">
+                <div
+                  v-for="service in selectedServices"
+                  :key="service.id"
+                  class="flex justify-between text-sm"
+                >
                   <div class="text-barbershop-text-muted">
                     <span>{{ service.name }}</span>
                     <span class="text-xs ml-2">({{ service.duration }}min)</span>
@@ -99,19 +135,38 @@
             </div>
 
             <!-- Call Message for "Altro Servizio" -->
-            <div v-if="showCallMessage" class="mt-6 p-4 bg-barbershop-gold/10 border border-barbershop-gold rounded-lg">
+            <div
+              v-if="showCallMessage"
+              class="mt-6 p-4 bg-barbershop-gold/10 border border-barbershop-gold rounded-lg"
+            >
               <div class="flex items-start">
-                <svg class="w-6 h-6 text-barbershop-gold mr-3 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                <svg
+                  class="w-6 h-6 text-barbershop-gold mr-3 mt-0.5 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
                 </svg>
                 <div>
                   <h4 class="font-semibold text-barbershop-text mb-2">Servizio Personalizzato</h4>
                   <p class="text-barbershop-text-muted text-sm mb-3">
-                    Per servizi speciali o personalizzati, chiama direttamente il nostro barbiere per concordare il trattamento e prenotare.
+                    Per servizi speciali o personalizzati, chiama direttamente il nostro barbiere
+                    per concordare il trattamento e prenotare.
                   </p>
                   <a href="tel:+391234567890" class="btn-primary text-sm inline-flex items-center">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                      />
                     </svg>
                     Chiama +39 123 456 7890
                   </a>
@@ -124,9 +179,7 @@
         <!-- Calendar and Time Slots -->
         <div class="lg:col-span-2">
           <div class="bg-barbershop-secondary border border-barbershop-border rounded-xl p-6">
-            <h3 class="text-xl font-semibold text-barbershop-text mb-6">
-              Seleziona Data e Orario
-            </h3>
+            <h3 class="text-xl font-semibold text-barbershop-text mb-6">Seleziona Data e Orario</h3>
 
             <!-- Calendar Navigation -->
             <div class="flex items-center justify-between mb-6">
@@ -135,7 +188,12 @@
                 class="p-2 text-barbershop-text-muted hover:text-barbershop-gold transition-colors"
               >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
                 </svg>
               </button>
               <h4 class="text-lg font-semibold text-barbershop-text">
@@ -146,7 +204,12 @@
                 class="p-2 text-barbershop-text-muted hover:text-barbershop-gold transition-colors"
               >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </button>
             </div>
@@ -177,7 +240,7 @@
                         : date.isAvailable
                           ? 'text-barbershop-text hover:bg-barbershop-accent'
                           : 'text-barbershop-text-muted cursor-not-allowed'
-                    : 'text-barbershop-text-muted/50 cursor-not-allowed'
+                    : 'text-barbershop-text-muted/50 cursor-not-allowed',
                 ]"
               >
                 {{ date.day }}
@@ -189,11 +252,23 @@
               <h4 class="text-lg font-semibold text-barbershop-text mb-4">
                 Orari Disponibili - {{ formatSelectedDate }}
               </h4>
-              
+
               <div v-if="availableTimeSlots.length === 0" class="text-center py-8">
-                <div class="w-12 h-12 bg-barbershop-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg class="w-6 h-6 text-barbershop-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                <div
+                  class="w-12 h-12 bg-barbershop-accent rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <svg
+                    class="w-6 h-6 text-barbershop-text-muted"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
                   </svg>
                 </div>
                 <p class="text-barbershop-text-muted">
@@ -213,7 +288,7 @@
                       ? 'bg-barbershop-gold text-black'
                       : timeSlot.available
                         ? 'bg-barbershop-accent border border-barbershop-border text-barbershop-text hover:border-barbershop-gold'
-                        : 'bg-barbershop-primary border border-barbershop-border text-barbershop-text-muted cursor-not-allowed opacity-50'
+                        : 'bg-barbershop-primary border border-barbershop-border text-barbershop-text-muted cursor-not-allowed opacity-50',
                   ]"
                 >
                   {{ timeSlot.time }}
@@ -222,7 +297,12 @@
             </div>
 
             <!-- Booking Summary -->
-            <div v-if="selectedServices.length > 0 && selectedDate && selectedTimeSlot && !showCallMessage" class="mt-8 p-6 bg-barbershop-accent border border-barbershop-border rounded-lg">
+            <div
+              v-if="
+                selectedServices.length > 0 && selectedDate && selectedTimeSlot && !showCallMessage
+              "
+              class="mt-8 p-6 bg-barbershop-accent border border-barbershop-border rounded-lg"
+            >
               <h4 class="text-lg font-semibold text-barbershop-text mb-4">
                 Riepilogo Prenotazione
               </h4>
@@ -230,7 +310,11 @@
                 <div class="space-y-1">
                   <span class="text-barbershop-text-muted">Servizi:</span>
                   <div class="ml-2">
-                    <div v-for="service in selectedServices" :key="service.id" class="flex justify-between">
+                    <div
+                      v-for="service in selectedServices"
+                      :key="service.id"
+                      class="flex justify-between"
+                    >
                       <span class="text-barbershop-text">{{ service.name }}</span>
                       <span class="text-barbershop-gold">€{{ service.price }}</span>
                     </div>
@@ -242,7 +326,9 @@
                 </div>
                 <div class="flex justify-between">
                   <span class="text-barbershop-text-muted">Orario:</span>
-                  <span class="text-barbershop-text">{{ selectedTimeSlot.time }} - {{ endTime }}</span>
+                  <span class="text-barbershop-text"
+                    >{{ selectedTimeSlot.time }} - {{ endTime }}</span
+                  >
                 </div>
                 <div class="flex justify-between">
                   <span class="text-barbershop-text-muted">Durata Totale:</span>
@@ -261,9 +347,25 @@
               >
                 <span v-if="!authStore.loading">Conferma Prenotazione</span>
                 <span v-else class="flex items-center justify-center">
-                  <svg class="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    class="animate-spin -ml-1 mr-3 h-5 w-5"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      class="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      stroke-width="4"
+                    ></circle>
+                    <path
+                      class="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                   Prenotazione in corso...
                 </span>
@@ -292,42 +394,42 @@ const services = ref([
     name: 'Taglio Capelli',
     description: 'Taglio classico e moderno personalizzato',
     duration: 30,
-    price: 25
+    price: 25,
   },
   {
     id: 2,
     name: 'Rasatura Completa',
     description: 'Rasatura con rasoio a mano libera',
     duration: 30,
-    price: 20
+    price: 20,
   },
   {
     id: 3,
     name: 'Cura della Barba',
     description: 'Trimming e modellatura barba',
     duration: 30,
-    price: 15
+    price: 15,
   },
   {
     id: 4,
     name: 'Shampoo e Styling',
     description: 'Lavaggio e acconciatura',
     duration: 15,
-    price: 10
+    price: 10,
   },
   {
     id: 5,
     name: 'Trattamento Viso',
     description: 'Pulizia e idratazione del viso',
     duration: 45,
-    price: 35
+    price: 35,
   },
   {
     id: 6,
     name: 'Massaggio Cuoio Capelluto',
     description: 'Massaggio rilassante per cuoio capelluto',
     duration: 15,
-    price: 12
+    price: 12,
   },
   {
     id: 999,
@@ -335,8 +437,8 @@ const services = ref([
     description: 'Servizi personalizzati - chiamaci per dettagli',
     duration: 0,
     price: 0,
-    isSpecial: true
-  }
+    isSpecial: true,
+  },
 ])
 
 // State
@@ -352,7 +454,7 @@ const dayHeaders = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab']
 const currentMonthYear = computed(() => {
   return currentDate.value.toLocaleDateString('it-IT', {
     month: 'long',
-    year: 'numeric'
+    year: 'numeric',
   })
 })
 
@@ -362,7 +464,7 @@ const formatSelectedDate = computed(() => {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
-    year: 'numeric'
+    year: 'numeric',
   })
 })
 
@@ -387,25 +489,25 @@ const endTime = computed(() => {
 const calendarDays = computed(() => {
   const year = currentDate.value.getFullYear()
   const month = currentDate.value.getMonth()
-  
+
   const firstDay = new Date(year, month, 1)
   const lastDay = new Date(year, month + 1, 0)
   const startDate = new Date(firstDay)
   startDate.setDate(startDate.getDate() - firstDay.getDay())
-  
+
   const days = []
   const today = new Date()
   today.setHours(0, 0, 0, 0)
-  
+
   for (let i = 0; i < 42; i++) {
     const date = new Date(startDate)
     date.setDate(startDate.getDate() + i)
-    
+
     const isCurrentMonth = date.getMonth() === month
     const isToday = date.getTime() === today.getTime()
     const isSelected = !!(selectedDate.value && date.getTime() === selectedDate.value.getTime())
     const isAvailable = date >= today && isCurrentMonth && date.getDay() !== 0 // No Sundays
-    
+
     days.push({
       key: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
       date: new Date(date),
@@ -413,10 +515,10 @@ const calendarDays = computed(() => {
       isCurrentMonth,
       isToday,
       isSelected,
-      isAvailable
+      isAvailable,
     })
   }
-  
+
   return days
 })
 
@@ -442,11 +544,11 @@ const availableTimeSlots = computed(() => {
     { time: '16:30', available: true },
     { time: '17:00', available: true },
     { time: '17:30', available: true },
-    { time: '18:00', available: true }
+    { time: '18:00', available: true },
   ]
 
   // Filter based on selected date and service duration
-  return timeSlots.filter(slot => {
+  return timeSlots.filter((slot) => {
     // Check if appointment would end before closing time
     const [hours, minutes] = slot.time.split(':').map(Number)
     const slotStartMinutes = hours * 60 + minutes
@@ -489,7 +591,7 @@ const selectDate = (dateObj: CalendarDay) => {
 }
 
 const isServiceSelected = (service: Service) => {
-  return selectedServices.value.some(s => s.id === service.id)
+  return selectedServices.value.some((s) => s.id === service.id)
 }
 
 const toggleService = (service: Service) => {
@@ -498,7 +600,7 @@ const toggleService = (service: Service) => {
     return
   }
 
-  const index = selectedServices.value.findIndex(s => s.id === service.id)
+  const index = selectedServices.value.findIndex((s) => s.id === service.id)
   if (index >= 0) {
     selectedServices.value.splice(index, 1)
   } else {
@@ -513,7 +615,7 @@ const toggleService = (service: Service) => {
 const confirmBooking = async () => {
   if (selectedServices.value.length === 0 || !selectedDate.value || !selectedTimeSlot.value) return
 
-  const serviceNames = selectedServices.value.map(s => s.name).join(', ')
+  const serviceNames = selectedServices.value.map((s) => s.name).join(', ')
 
   const appointmentData = {
     date: selectedDate.value.toISOString().split('T')[0],
@@ -521,7 +623,7 @@ const confirmBooking = async () => {
     service: serviceNames,
     price: totalPrice.value,
     duration: totalDuration.value,
-    services: selectedServices.value
+    services: selectedServices.value,
   }
 
   const success = await authStore.bookAppointment(appointmentData)

@@ -20,15 +20,15 @@
   .btn-primary {
     @apply bg-barbershop-gold hover:bg-barbershop-gold-dark text-black font-semibold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105;
   }
-  
+
   .btn-secondary {
     @apply border-2 border-barbershop-gold text-barbershop-gold hover:bg-barbershop-gold hover:text-black px-6 py-3 rounded-lg transition-all duration-300;
   }
-  
+
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
-  
+
   .text-gradient {
     @apply bg-gradient-to-r from-barbershop-gold to-barbershop-gold-light bg-clip-text text-transparent;
   }
@@ -51,8 +51,13 @@ html {
 
 /* Custom animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .animate-float {

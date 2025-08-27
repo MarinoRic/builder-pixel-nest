@@ -8,17 +8,17 @@
             <h1 class="text-3xl font-display font-bold text-barbershop-text mb-2">
               Area Personale
             </h1>
-            <p class="text-barbershop-text-muted">
-              Benvenuto, {{ authStore.userFullName }}
-            </p>
+            <p class="text-barbershop-text-muted">Benvenuto, {{ authStore.userFullName }}</p>
           </div>
           <div class="mt-4 md:mt-0">
-            <button
-              @click="handleLogout"
-              class="btn-secondary"
-            >
+            <button @click="handleLogout" class="btn-secondary">
               <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                />
               </svg>
               Esci
             </button>
@@ -48,9 +48,21 @@
         <div class="bg-barbershop-secondary border border-barbershop-border rounded-xl p-6">
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-barbershop-text font-semibold">Prossimi Appuntamenti</h3>
-            <div class="w-10 h-10 bg-barbershop-gold/20 rounded-lg flex items-center justify-center">
-              <svg class="w-6 h-6 text-barbershop-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            <div
+              class="w-10 h-10 bg-barbershop-gold/20 rounded-lg flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-barbershop-gold"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
               </svg>
             </div>
           </div>
@@ -58,7 +70,11 @@
             {{ authStore.activeAppointments.length }}
           </div>
           <p class="text-barbershop-text-muted text-sm">
-            {{ authStore.activeAppointments.length === 0 ? 'Nessun appuntamento' : 'Appuntamenti attivi' }}
+            {{
+              authStore.activeAppointments.length === 0
+                ? 'Nessun appuntamento'
+                : 'Appuntamenti attivi'
+            }}
           </p>
         </div>
 
@@ -69,15 +85,15 @@
             <router-link to="/prenota-appuntamento" class="block w-full btn-primary text-center">
               Prenota Appuntamento
             </router-link>
-            <button class="block w-full btn-secondary text-center">
-              Contatta il Salone
-            </button>
+            <button class="block w-full btn-secondary text-center">Contatta il Salone</button>
           </div>
         </div>
       </div>
 
       <!-- Main Content Tabs -->
-      <div class="bg-barbershop-secondary border border-barbershop-border rounded-xl overflow-hidden">
+      <div
+        class="bg-barbershop-secondary border border-barbershop-border rounded-xl overflow-hidden"
+      >
         <!-- Tab Navigation -->
         <div class="border-b border-barbershop-border">
           <nav class="flex space-x-8 px-6">
@@ -87,7 +103,7 @@
                 'py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200',
                 activeTab === 'appointments'
                   ? 'border-barbershop-gold text-barbershop-gold'
-                  : 'border-transparent text-barbershop-text-muted hover:text-barbershop-text hover:border-barbershop-text-muted'
+                  : 'border-transparent text-barbershop-text-muted hover:text-barbershop-text hover:border-barbershop-text-muted',
               ]"
             >
               Le Mie Prenotazioni
@@ -98,7 +114,7 @@
                 'py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200',
                 activeTab === 'profile'
                   ? 'border-barbershop-gold text-barbershop-gold'
-                  : 'border-transparent text-barbershop-text-muted hover:text-barbershop-text hover:border-barbershop-text-muted'
+                  : 'border-transparent text-barbershop-text-muted hover:text-barbershop-text hover:border-barbershop-text-muted',
               ]"
             >
               Profilo
@@ -111,14 +127,24 @@
           <!-- Appointments Tab -->
           <div v-if="activeTab === 'appointments'">
             <div v-if="authStore.appointments.length === 0" class="text-center py-12">
-              <div class="w-16 h-16 bg-barbershop-accent rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-barbershop-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              <div
+                class="w-16 h-16 bg-barbershop-accent rounded-full flex items-center justify-center mx-auto mb-4"
+              >
+                <svg
+                  class="w-8 h-8 text-barbershop-text-muted"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
                 </svg>
               </div>
-              <h3 class="text-xl font-semibold text-barbershop-text mb-2">
-                Nessuna Prenotazione
-              </h3>
+              <h3 class="text-xl font-semibold text-barbershop-text mb-2">Nessuna Prenotazione</h3>
               <p class="text-barbershop-text-muted mb-6">
                 Non hai ancora prenotato alcun appuntamento. Prenota ora il tuo primo taglio!
               </p>
@@ -142,24 +168,47 @@
                       <span
                         :class="[
                           'px-3 py-1 rounded-full text-xs font-medium',
-                          appointment.status === 'confirmed' ? 'bg-green-500/20 text-green-400' :
-                          appointment.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' :
-                          appointment.status === 'completed' ? 'bg-blue-500/20 text-blue-400' :
-                          'bg-red-500/20 text-red-400'
+                          appointment.status === 'confirmed'
+                            ? 'bg-green-500/20 text-green-400'
+                            : appointment.status === 'pending'
+                              ? 'bg-yellow-500/20 text-yellow-400'
+                              : appointment.status === 'completed'
+                                ? 'bg-blue-500/20 text-blue-400'
+                                : 'bg-red-500/20 text-red-400',
                         ]"
                       >
                         {{ getStatusText(appointment.status) }}
                       </span>
                     </div>
                     <div class="flex items-center text-barbershop-text-muted text-sm mb-2">
-                      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                      <svg
+                        class="w-4 h-4 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
                       </svg>
                       {{ formatDate(appointment.date) }} alle {{ appointment.time }}
                     </div>
                     <div class="flex items-center text-barbershop-text-muted text-sm">
-                      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                      <svg
+                        class="w-4 h-4 mr-2"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"
+                        />
                       </svg>
                       €{{ appointment.price }}
                     </div>
@@ -167,17 +216,16 @@
                   <div class="mt-4 md:mt-0 md:ml-6">
                     <div class="flex space-x-2">
                       <button
-                        v-if="appointment.status === 'confirmed' || appointment.status === 'pending'"
+                        v-if="
+                          appointment.status === 'confirmed' || appointment.status === 'pending'
+                        "
                         @click="cancelAppointment(appointment.id)"
                         :disabled="authStore.loading"
                         class="btn-secondary text-sm"
                       >
                         Cancella
                       </button>
-                      <button
-                        v-if="appointment.status === 'completed'"
-                        class="btn-primary text-sm"
-                      >
+                      <button v-if="appointment.status === 'completed'" class="btn-primary text-sm">
                         Prenota di Nuovo
                       </button>
                     </div>
@@ -193,12 +241,10 @@
               <h3 class="text-xl font-semibold text-barbershop-text mb-6">
                 Informazioni Personali
               </h3>
-              
+
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label class="block text-sm font-medium text-barbershop-text mb-2">
-                    Nome
-                  </label>
+                  <label class="block text-sm font-medium text-barbershop-text mb-2"> Nome </label>
                   <input
                     type="text"
                     :value="authStore.user?.nome"
@@ -218,9 +264,7 @@
                   />
                 </div>
                 <div>
-                  <label class="block text-sm font-medium text-barbershop-text mb-2">
-                    Email
-                  </label>
+                  <label class="block text-sm font-medium text-barbershop-text mb-2"> Email </label>
                   <input
                     type="email"
                     :value="authStore.user?.email"
@@ -242,12 +286,8 @@
               </div>
 
               <div class="mt-8">
-                <button class="btn-primary mr-4">
-                  Modifica Profilo
-                </button>
-                <button class="btn-secondary">
-                  Cambia Password
-                </button>
+                <button class="btn-primary mr-4">Modifica Profilo</button>
+                <button class="btn-secondary">Cambia Password</button>
               </div>
             </div>
           </div>
@@ -280,11 +320,16 @@ const cancelAppointment = async (appointmentId: string) => {
 
 const getStatusText = (status: string) => {
   switch (status) {
-    case 'confirmed': return 'Confermato'
-    case 'pending': return 'In Attesa'
-    case 'completed': return 'Completato'
-    case 'cancelled': return 'Cancellato'
-    default: return status
+    case 'confirmed':
+      return 'Confermato'
+    case 'pending':
+      return 'In Attesa'
+    case 'completed':
+      return 'Completato'
+    case 'cancelled':
+      return 'Cancellato'
+    default:
+      return status
   }
 }
 
@@ -294,7 +339,7 @@ const formatDate = (dateString: string) => {
     weekday: 'long',
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 

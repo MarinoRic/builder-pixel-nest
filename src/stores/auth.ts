@@ -29,26 +29,26 @@ export const useAuthStore = defineStore('auth', () => {
 
   // Getters
   const isLoggedIn = computed(() => !!user.value)
-  const userFullName = computed(() => 
-    user.value ? `${user.value.nome} ${user.value.cognome}` : ''
+  const userFullName = computed(() =>
+    user.value ? `${user.value.nome} ${user.value.cognome}` : '',
   )
   const userInitials = computed(() => {
     if (!user.value) return 'U'
     return `${user.value.nome.charAt(0)}${user.value.cognome.charAt(0)}`.toUpperCase()
   })
-  const activeAppointments = computed(() => 
-    appointments.value.filter(app => app.status === 'confirmed' || app.status === 'pending')
+  const activeAppointments = computed(() =>
+    appointments.value.filter((app) => app.status === 'confirmed' || app.status === 'pending'),
   )
 
   // Actions
   const login = async (email: string, password: string): Promise<boolean> => {
     loading.value = true
     error.value = null
-    
+
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
       // Mock successful login - in real app, this would be an API call
       if (email === 'mario.rossi@email.com' && password === 'password123') {
         user.value = {
@@ -56,15 +56,15 @@ export const useAuthStore = defineStore('auth', () => {
           nome: 'Mario',
           cognome: 'Rossi',
           email: 'mario.rossi@email.com',
-          telefono: '+39 123 456 7890'
+          telefono: '+39 123 456 7890',
         }
-        
+
         // Load mock appointments
         loadAppointments()
-        
+
         // Store in localStorage for persistence
         localStorage.setItem('user', JSON.stringify(user.value))
-        
+
         return true
       } else {
         error.value = 'Email o password non corretti'
@@ -81,23 +81,23 @@ export const useAuthStore = defineStore('auth', () => {
   const register = async (userData: Omit<User, 'id'> & { password: string }): Promise<boolean> => {
     loading.value = true
     error.value = null
-    
+
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
       // Mock successful registration
       user.value = {
         id: Date.now().toString(),
         nome: userData.nome,
         cognome: userData.cognome,
         email: userData.email,
-        telefono: userData.telefono
+        telefono: userData.telefono,
       }
-      
+
       // Store in localStorage for persistence
       localStorage.setItem('user', JSON.stringify(user.value))
-      
+
       return true
     } catch (err) {
       error.value = 'Errore durante la registrazione'
@@ -123,7 +123,7 @@ export const useAuthStore = defineStore('auth', () => {
         time: '14:00',
         service: 'Taglio Classico',
         status: 'confirmed',
-        price: 35
+        price: 35,
       },
       {
         id: '2',
@@ -131,27 +131,29 @@ export const useAuthStore = defineStore('auth', () => {
         time: '16:30',
         service: 'Rasatura + Taglio',
         status: 'pending',
-        price: 60
-      }
+        price: 60,
+      },
     ]
   }
 
-  const bookAppointment = async (appointment: Omit<Appointment, 'id' | 'status'>): Promise<boolean> => {
+  const bookAppointment = async (
+    appointment: Omit<Appointment, 'id' | 'status'>,
+  ): Promise<boolean> => {
     loading.value = true
     error.value = null
-    
+
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+
       const newAppointment: Appointment = {
         ...appointment,
         id: Date.now().toString(),
-        status: 'pending'
+        status: 'pending',
       }
-      
+
       appointments.value.push(newAppointment)
-      
+
       return true
     } catch (err) {
       error.value = 'Errore durante la prenotazione'
@@ -163,16 +165,16 @@ export const useAuthStore = defineStore('auth', () => {
 
   const cancelAppointment = async (appointmentId: string): Promise<boolean> => {
     loading.value = true
-    
+
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 500))
-      
-      const index = appointments.value.findIndex(app => app.id === appointmentId)
+      await new Promise((resolve) => setTimeout(resolve, 500))
+
+      const index = appointments.value.findIndex((app) => app.id === appointmentId)
       if (index !== -1) {
         appointments.value[index].status = 'cancelled'
       }
-      
+
       return true
     } catch (err) {
       error.value = 'Errore durante la cancellazione'
@@ -197,19 +199,19 @@ export const useAuthStore = defineStore('auth', () => {
     appointments,
     loading,
     error,
-    
+
     // Getters
     isLoggedIn,
     userFullName,
     userInitials,
     activeAppointments,
-    
+
     // Actions
     login,
     register,
     logout,
     bookAppointment,
     cancelAppointment,
-    initAuth
+    initAuth,
   }
 })
