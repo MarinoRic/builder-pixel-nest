@@ -310,7 +310,7 @@ const calendarDays = computed(() => {
     
     const isCurrentMonth = date.getMonth() === month
     const isToday = date.getTime() === today.getTime()
-    const isSelected = selectedDate.value && date.getTime() === selectedDate.value.getTime()
+    const isSelected = !!(selectedDate.value && date.getTime() === selectedDate.value.getTime())
     const isAvailable = date >= today && isCurrentMonth && date.getDay() !== 0 // No Sundays
     
     days.push({
@@ -355,7 +355,7 @@ const availableTimeSlots = computed(() => {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
     
-    if (selectedDate.value.getTime() === today.getTime()) {
+    if (selectedDate.value && selectedDate.value.getTime() === today.getTime()) {
       const now = new Date()
       const [hours, minutes] = slot.time.split(':').map(Number)
       const slotTime = new Date()
