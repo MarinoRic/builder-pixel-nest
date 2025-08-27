@@ -92,7 +92,7 @@
                 <div class="border-t border-barbershop-border pt-2 mt-3">
                   <div class="flex justify-between text-sm font-semibold">
                     <span class="text-barbershop-text">Durata Totale: {{ totalDuration }}min</span>
-                    <span class="text-barbershop-gold">Totale: ��{{ totalPrice }}</span>
+                    <span class="text-barbershop-gold">Totale: €{{ totalPrice }}</span>
                   </div>
                 </div>
               </div>
@@ -421,8 +421,11 @@ const calendarDays = computed(() => {
 })
 
 const availableTimeSlots = computed(() => {
-  if (!selectedDate.value) return []
-  
+  if (!selectedDate.value || selectedServices.value.length === 0) return []
+
+  const duration = totalDuration.value
+  const endOfDay = 19 * 60 // 19:00 in minutes
+
   const timeSlots = [
     { time: '09:00', available: true },
     { time: '09:30', available: true },
@@ -441,23 +444,31 @@ const availableTimeSlots = computed(() => {
     { time: '17:30', available: true },
     { time: '18:00', available: true }
   ]
-  
-  // Filter based on selected date (mock logic)
+
+  // Filter based on selected date and service duration
   return timeSlots.filter(slot => {
+    // Check if appointment would end before closing time
+    const [hours, minutes] = slot.time.split(':').map(Number)
+    const slotStartMinutes = hours * 60 + minutes
+    const slotEndMinutes = slotStartMinutes + duration
+
+    if (slotEndMinutes > endOfDay) {
+      return false
+    }
+
     // If it's today, filter out past times
     const today = new Date()
     today.setHours(0, 0, 0, 0)
-    
+
     if (selectedDate.value && selectedDate.value.getTime() === today.getTime()) {
       const now = new Date()
-      const [hours, minutes] = slot.time.split(':').map(Number)
       const slotTime = new Date()
       slotTime.setHours(hours, minutes, 0, 0)
-      
-      return slotTime > now
+
+      return slotTime > now && slot.available
     }
-    
-    return true
+
+    return slot.available
   })
 })
 
@@ -500,17 +511,21 @@ const toggleService = (service: Service) => {
 }
 
 const confirmBooking = async () => {
-  if (!selectedService.value || !selectedDate.value || !selectedTimeSlot.value) return
-  
+  if (selectedServices.value.length === 0 || !selectedDate.value || !selectedTimeSlot.value) return
+
+  const serviceNames = selectedServices.value.map(s => s.name).join(', ')
+
   const appointmentData = {
     date: selectedDate.value.toISOString().split('T')[0],
     time: selectedTimeSlot.value.time,
-    service: selectedService.value.name,
-    price: selectedService.value.price
+    service: serviceNames,
+    price: totalPrice.value,
+    duration: totalDuration.value,
+    services: selectedServices.value
   }
-  
+
   const success = await authStore.bookAppointment(appointmentData)
-  
+
   if (success) {
     alert('Prenotazione confermata! Riceverai una conferma via email.')
     router.push('/area-personale')
