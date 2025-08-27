@@ -4,6 +4,7 @@ export interface Service {
   description: string
   duration: number
   price: number
+  isSpecial?: boolean
 }
 
 export interface TimeSlot {

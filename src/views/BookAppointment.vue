@@ -26,30 +26,53 @@
         <div class="lg:col-span-1">
           <div class="bg-barbershop-secondary border border-barbershop-border rounded-xl p-6">
             <h3 class="text-xl font-semibold text-barbershop-text mb-6">
-              Seleziona il Servizio
+              Seleziona i Servizi
             </h3>
             <div class="space-y-3">
               <div
                 v-for="service in services"
                 :key="service.id"
-                @click="selectedService = service"
+                @click="toggleService(service)"
                 :class="[
                   'p-4 border rounded-lg cursor-pointer transition-all duration-200',
-                  selectedService?.id === service.id
-                    ? 'border-barbershop-gold bg-barbershop-gold/10'
-                    : 'border-barbershop-border hover:border-barbershop-text-muted bg-barbershop-accent'
+                  service.isSpecial
+                    ? 'border-barbershop-text-muted bg-barbershop-secondary hover:border-barbershop-gold'
+                    : isServiceSelected(service)
+                      ? 'border-barbershop-gold bg-barbershop-gold/10'
+                      : 'border-barbershop-border hover:border-barbershop-text-muted bg-barbershop-accent'
                 ]"
               >
                 <div class="flex justify-between items-start">
-                  <div>
-                    <h4 class="font-semibold text-barbershop-text">{{ service.name }}</h4>
-                    <p class="text-sm text-barbershop-text-muted mt-1">{{ service.description }}</p>
-                    <p class="text-xs text-barbershop-text-muted mt-2">
-                      Durata: {{ service.duration }} min
-                    </p>
+                  <div class="flex-1">
+                    <div class="flex items-center">
+                      <div v-if="!service.isSpecial" class="mr-3">
+                        <div :class="[
+                          'w-5 h-5 border-2 rounded flex items-center justify-center transition-colors',
+                          isServiceSelected(service)
+                            ? 'bg-barbershop-gold border-barbershop-gold'
+                            : 'border-barbershop-border'
+                        ]">
+                          <svg v-if="isServiceSelected(service)" class="w-3 h-3 text-black" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                          </svg>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 class="font-semibold text-barbershop-text">{{ service.name }}</h4>
+                        <p class="text-sm text-barbershop-text-muted mt-1">{{ service.description }}</p>
+                        <p v-if="!service.isSpecial" class="text-xs text-barbershop-text-muted mt-2">
+                          Durata: {{ service.duration }} min
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="text-right">
+                  <div v-if="!service.isSpecial" class="text-right ml-4">
                     <span class="text-lg font-bold text-barbershop-gold">€{{ service.price }}</span>
+                  </div>
+                  <div v-else class="ml-4">
+                    <svg class="w-6 h-6 text-barbershop-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
                   </div>
                 </div>
               </div>
