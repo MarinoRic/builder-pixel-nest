@@ -222,14 +222,19 @@
             </div>
 
             <!-- Booking Summary -->
-            <div v-if="selectedService && selectedDate && selectedTimeSlot" class="mt-8 p-6 bg-barbershop-accent border border-barbershop-border rounded-lg">
+            <div v-if="selectedServices.length > 0 && selectedDate && selectedTimeSlot && !showCallMessage" class="mt-8 p-6 bg-barbershop-accent border border-barbershop-border rounded-lg">
               <h4 class="text-lg font-semibold text-barbershop-text mb-4">
                 Riepilogo Prenotazione
               </h4>
               <div class="space-y-2 text-sm">
-                <div class="flex justify-between">
-                  <span class="text-barbershop-text-muted">Servizio:</span>
-                  <span class="text-barbershop-text">{{ selectedService.name }}</span>
+                <div class="space-y-1">
+                  <span class="text-barbershop-text-muted">Servizi:</span>
+                  <div class="ml-2">
+                    <div v-for="service in selectedServices" :key="service.id" class="flex justify-between">
+                      <span class="text-barbershop-text">{{ service.name }}</span>
+                      <span class="text-barbershop-gold">€{{ service.price }}</span>
+                    </div>
+                  </div>
                 </div>
                 <div class="flex justify-between">
                   <span class="text-barbershop-text-muted">Data:</span>
@@ -237,15 +242,15 @@
                 </div>
                 <div class="flex justify-between">
                   <span class="text-barbershop-text-muted">Orario:</span>
-                  <span class="text-barbershop-text">{{ selectedTimeSlot.time }}</span>
+                  <span class="text-barbershop-text">{{ selectedTimeSlot.time }} - {{ endTime }}</span>
                 </div>
                 <div class="flex justify-between">
-                  <span class="text-barbershop-text-muted">Durata:</span>
-                  <span class="text-barbershop-text">{{ selectedService.duration }} min</span>
+                  <span class="text-barbershop-text-muted">Durata Totale:</span>
+                  <span class="text-barbershop-text">{{ totalDuration }} min</span>
                 </div>
                 <div class="flex justify-between border-t border-barbershop-border pt-2 mt-3">
                   <span class="text-barbershop-text font-semibold">Totale:</span>
-                  <span class="text-barbershop-gold font-bold text-lg">€{{ selectedService.price }}</span>
+                  <span class="text-barbershop-gold font-bold text-lg">€{{ totalPrice }}</span>
                 </div>
               </div>
 
