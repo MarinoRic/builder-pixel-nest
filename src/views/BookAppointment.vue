@@ -535,9 +535,6 @@ const confirmBooking = async () => {
 }
 
 onMounted(() => {
-  // Auto-select first service if only one user comes from "no appointments" state
-  if (services.value.length > 0) {
-    selectedService.value = services.value[0]
-  }
+  // Initialize component - no auto-selection for multiple service support
 })
 </script>

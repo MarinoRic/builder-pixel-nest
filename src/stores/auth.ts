@@ -16,6 +16,8 @@ export interface Appointment {
   service: string
   status: 'confirmed' | 'pending' | 'completed' | 'cancelled'
   price: number
+  duration?: number
+  services?: any[]
 }
 
 export const useAuthStore = defineStore('auth', () => {
