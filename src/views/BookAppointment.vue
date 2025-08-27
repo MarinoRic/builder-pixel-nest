@@ -230,43 +230,59 @@ const authStore = useAuthStore()
 const services = ref([
   {
     id: 1,
-    name: 'Taglio Classico',
-    description: 'Taglio tradizionale personalizzato',
-    duration: 45,
-    price: 35
+    name: 'Taglio Capelli',
+    description: 'Taglio classico e moderno personalizzato',
+    duration: 30,
+    price: 25
   },
   {
     id: 2,
-    name: 'Rasatura Tradizionale',
+    name: 'Rasatura Completa',
     description: 'Rasatura con rasoio a mano libera',
     duration: 30,
-    price: 25
+    price: 20
   },
   {
     id: 3,
     name: 'Cura della Barba',
     description: 'Trimming e modellatura barba',
     duration: 30,
-    price: 20
+    price: 15
   },
   {
     id: 4,
-    name: 'Taglio + Rasatura',
-    description: 'Pacchetto completo taglio e rasatura',
-    duration: 75,
-    price: 50
+    name: 'Shampoo e Styling',
+    description: 'Lavaggio e acconciatura',
+    duration: 15,
+    price: 10
   },
   {
     id: 5,
     name: 'Trattamento Viso',
     description: 'Pulizia e idratazione del viso',
     duration: 45,
-    price: 40
+    price: 35
+  },
+  {
+    id: 6,
+    name: 'Massaggio Cuoio Capelluto',
+    description: 'Massaggio rilassante per cuoio capelluto',
+    duration: 15,
+    price: 12
+  },
+  {
+    id: 999,
+    name: 'Altro Servizio',
+    description: 'Servizi personalizzati - chiamaci per dettagli',
+    duration: 0,
+    price: 0,
+    isSpecial: true
   }
 ])
 
 // State
-const selectedService = ref<Service | null>(null)
+const selectedServices = ref<Service[]>([])
+const showCallMessage = ref(false)
 const selectedDate = ref<Date | null>(null)
 const selectedTimeSlot = ref<TimeSlot | null>(null)
 const currentDate = ref(new Date())
